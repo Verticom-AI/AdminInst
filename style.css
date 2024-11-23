@@ -1,0 +1,943 @@
+/* تنظیمات عمومی */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Vazir', sans-serif;
+  background-color: #817d7d;
+  color: #333;
+  direction: rtl; /* راست‌چین کردن محتوا */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* تم تاریک */
+body.dark-theme {
+  background-color: #333;
+  color: #fff;
+}
+
+/* هدر */
+header {
+  background-color: #333;
+  color: #adb0b5;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-theme header {
+  background-color: #f1f1f1;
+  color: #3e3d3d;
+}
+
+header .header-left i,
+header .header-right i {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+header .header-center h1 {
+  font-size: 24px;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/* منوی کناری */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  transition: right 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  padding-top: 60px;
+  z-index: 1000; /* مقدار بالا برای نمایش روی ویدیوها */
+
+}
+
+body.light-theme .side-menu {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-menu ul li {
+  padding: 15px;
+  text-align: right;
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.side-menu ul li a:hover {
+  color: #f39c12;
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+/* لیست مشاوره‌ها */
+.consultation-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.consultation-list li {
+  margin-bottom: 15px;
+}
+
+.consultation-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 15px;
+  background-color: #6c737b;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.consultation-btn:hover {
+  background-color: #637588;
+  transform: scale(1.05);
+}
+
+/* استایل فرم مشاوره */
+.wizard {
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #fff;
+  color: #333;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-theme .wizard {
+  background-color: #444;
+  color: #fff;
+}
+
+.wizard input[type="number"],
+.wizard select,
+.wizard textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-theme .wizard input[type="number"],
+body.dark-theme .wizard select,
+body.dark-theme .wizard textarea {
+  background-color: #555;
+  color: #fff;
+  border-color: #666;
+}
+
+.wizard-buttons button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-theme .wizard-buttons button {
+  background-color: #666;
+  color: #fff;
+}
+
+.wizard-buttons button:hover {
+  background-color: #555;
+}
+
+body.dark-theme .wizard-buttons button:hover {
+  background-color: #777;
+}
+
+/* بخش آپلود فایل */
+.file-upload {
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: right;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-theme .file-upload {
+  background-color: #444;
+  border-color: #666;
+  color: #fff;
+}
+
+.file-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  direction: rtl;
+}
+
+.file-input-container input[type="file"] {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file-btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-theme .file-btn {
+  background-color: #0056b3;
+}
+
+.file-btn:hover {
+  background-color: #0056b3;
+}
+
+/* استایل فرم */
+.special-consultation-section {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+    
+.special-consultation-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+.special-consultation-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.special-consultation-section label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+.special-consultation-section input,
+.special-consultation-section select,
+.special-consultation-section textarea,
+.special-consultation-section button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+}
+.special-consultation-section textarea {
+  resize: vertical;
+}
+.special-consultation-section button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.special-consultation-section button:hover {
+  background-color: #0056b3;
+}
+.file-upload {
+  margin-top: 10px;
+}
+.file-upload small {
+  font-size: 12px;
+  color: #888;
+}
+/* دکمه‌ها */
+button, .file-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, .file-btn:hover {
+  background-color: var(--primary-hover-color);
+}
+
+/* بخش آپلود فایل */
+.file-upload {
+  margin-top: 30px;
+  background-color: var(--light-bg);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: right;
+}
+
+body.dark-theme .file-upload {
+  background-color: var(--dark-bg);
+}
+
+/* استایل فرم */
+.special-consultation-section {
+  margin-top: 20px;
+  padding: 15px;
+  background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.special-consultation-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.special-consultation-section h2 {
+  text-align: center;
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.special-consultation-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.special-consultation-section label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.special-consultation-section input,
+.special-consultation-section select,
+.special-consultation-section textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.special-consultation-section input:focus,
+.special-consultation-section select:focus,
+.special-consultation-section textarea:focus {
+  border-color: #ff001e;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.special-consultation-section textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+/* دکمه ارسال */
+.special-consultation-section button {
+  background: linear-gradient(to right, #007bff, #0056b3);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.special-consultation-section button:hover {
+  background: linear-gradient(to right, #0056b3, #00408f);
+  transform: translateY(-2px);
+}
+
+.special-consultation-section button:active {
+  transform: translateY(1px);
+}
+
+/* بخش آپلود فایل */
+.file-upload {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  text-align: right;
+}
+
+.file-upload label {
+  background: linear-gradient(to right, #516273, #34404d);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.file-upload label:hover {
+  background: linear-gradient(to right, #0056b3, #00408f);
+  transform: scale(1.05);
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-upload small {
+  font-size: 12px;
+  color: #777;
+  text-align: right;
+}
+
+/* واکنش‌گرایی برای موبایل */
+@media (max-width: 768px) {
+  .special-consultation-section {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .special-consultation-section h2 {
+    font-size: 20px;
+  }
+
+  .special-consultation-section input,
+  .special-consultation-section select,
+  .special-consultation-section textarea {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .special-consultation-section button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .file-upload label {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+/* استایل بخش دسترسی سریع */
+#quick-access {
+  margin-top: 30px;
+  padding: 20px;
+  background: linear-gradient(to right, #8d9297, #2d3e50);
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#quick-access h3 {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#quick-access ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#quick-access ul li {
+  flex: 1 1 calc(50% - 10px); /* دو ستون در دسکتاپ */
+  text-align: center;
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  #quick-access ul li {
+    flex: 1 1 100%; /* یک ستون در موبایل */
+  }
+}
+
+#quick-access ul li a {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+#quick-access ul li a:hover {
+  background-color: #fff;
+  color: #0056b3;
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* تم تاریک */
+body.dark-theme #quick-access {
+  background: linear-gradient(to right, #444, #222);
+  color: #fff;
+}
+
+body.dark-theme #quick-access ul li a {
+  border-color: #666;
+}
+
+body.dark-theme #quick-access ul li a:hover {
+  background-color: #666;
+  color: #fff;
+}
+
+/* استایل بخش ویدیو */
+.video-section {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+body.dark-theme .video-section {
+  background-color: #444;
+  color: #fff;
+}
+
+.video-section h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+body.dark-theme .video-section h3 {
+  color: #fff;
+}
+
+.video-section video {
+  width: 100%; /* تمام عرض */
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.video-section video:hover {
+  transform: scale(1.02);
+}
+
+/* برای نمایش ویدیوها در ستون‌ها در صفحات بزرگ‌تر */
+@media (min-width: 768px) {
+  .video-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+  }
+
+  .video-section video {
+    width: calc(48%); /* دو ستون */
+    height: auto;
+  }
+}
+
+/* بخش محصولات */
+#products {
+  padding: 20px;
+  background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#products h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+body.dark-theme #products {
+  background: linear-gradient(to bottom, #333, #444);
+}
+
+body.dark-theme #products h2 {
+  color: #fff;
+}
+
+/* گالری محصولات */
+.product-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+.product {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+body.dark-theme .product {
+  background: #444;
+  border-color: #666;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* تصاویر محصولات */
+.product img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: transform 0.2s ease;
+}
+
+.product img:hover {
+  transform: scale(1.05);
+}
+
+/* عناوین و توضیحات محصولات */
+.product h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+body.dark-theme .product h3 {
+  color: #fff;
+}
+
+.product p {
+  font-size: 14px;
+  color: #666;
+}
+
+body.dark-theme .product p {
+  color: #ccc;
+}
+
+/* واکنش‌گرایی */
+@media (max-width: 768px) {
+  .product-gallery {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  #products h2 {
+    font-size: 20px;
+  }
+
+  .product {
+    padding: 10px;
+  }
+}
+
+/* بخش تماس با ما */
+main {
+  padding: 20px;
+  background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+main h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+body.dark-theme main {
+  background: linear-gradient(to bottom, #333, #444);
+}
+
+body.dark-theme main h2 {
+  color: #fff;
+}
+
+main p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+body.dark-theme main p {
+  color: #ccc;
+}
+
+/* لیست اطلاعات تماس */
+main ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  line-height: 2;
+}
+
+main ul li {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body.dark-theme main ul li {
+  color: #ccc;
+}
+
+main ul li i {
+  color: #007bff;
+  font-size: 20px;
+}
+
+body.dark-theme main ul li i {
+  color: #66b3ff;
+}
+
+/* واکنش‌گرایی */
+@media (max-width: 768px) {
+  main {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  main h2 {
+    font-size: 20px;
+  }
+
+  main ul li {
+    font-size: 14px;
+  }
+}
+
+  .consultation-button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .consultation-btn {
+    display: inline-block;
+    background: linear-gradient(to right, #434343, #858585);
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .consultation-btn:hover {
+    background: linear-gradient(to right, #11243b, #003d80);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .consultation-btn:active {
+    transform: translateY(1px);
+  }
+
+  
+  #consultationsSection.full-width {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 999;
+    overflow: auto;
+    padding: 20px;
+  }
+
+  #closeConsultations {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  #closeConsultations.visible {
+    display: block;
+  }
+
+  #sendMessage {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 150px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    #sendMessage {
+      max-width: 100px;
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #sendMessage {
+      max-width: 80px;
+      font-size: 12px;
+    }
+  }
+
+  header {
+    background-color: #212121fa !important; /* تغییر رنگ هنگام هاور */
+    color: #4d9d7cfa ;
+    -webkit-text-fill-color: #eeeaeafa ;
+  }    
+
+  /* منوی کناری */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #f1f1f1;
+  color: #333;
+  padding-top: 60px;
+  transition: right 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-theme .side-menu {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+body.dark-theme .side-menu {
+  background-color: #222;
+  color: #ccc;
+  border-right: 1px solid #444;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu ul li {
+  padding: 15px;
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+body.dark-theme .side-menu ul li a {
+  color: #ccc;
+}
+
+body.dark-theme .side-menu ul li a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+
+#specialConsultationForm {
+  display: none;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+#specialConsultationForm h3 {
+  margin-bottom: 15px;
+}
+
+#specialConsultationForm form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

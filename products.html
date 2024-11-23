@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>محصولات</title>
+  <link rel="stylesheet" href="products.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+
+  </style>
+</head>
+<body>
+<!-- هدر -->
+<header>
+  <style> 
+    header {
+      background-color: #212121fa !important; /* تغییر رنگ هنگام هاور */
+      color: #4d9d7cfa ;
+      -webkit-text-fill-color: #eeeaeafa ;
+    }    
+    </style>
+  <div class="header-left">
+    <i id="menuIcon" class="fas fa-bars"></i>
+  </div>
+  <div class="header-center">
+    <h1>محصولات</h1>
+  </div>
+  <div class="header-right">
+    <i id="themeToggle" class="fas fa-adjust"></i>
+  </div>
+</header>
+
+  <!-- منوی کناری -->
+    <!-- منوی کناری -->
+    <nav id="sideMenu" class="side-menu">
+      <ul>
+        <li><a href="index.html">صفحه اصلی</a></li>
+        <li><a href="consultations.html">مشاوره‌ها</a></li>
+        <li><a href="products.html">محصولات</a></li>
+        <li><a href="about.html">درباره ما</a></li>
+        <li><a href="rules.html">قوانین و مقررات</a></li>
+        <li><a href="login.html">ورود/ثبت نام</a></li>
+        <li><a href="contact.html">تماس با ما</a></li>
+      </ul>
+    </nav>
+  <main>
+    <section id="products">
+      <h2>محصولات ما</h2>
+      <div class="product-gallery">
+        <div class="product">
+          <img src="https://via.placeholder.com/300x200" alt="محصول 1">
+          <h3>محصول 1</h3>
+          <p class="price">50000 تومان</p>
+          <p class="description">این محصول برای بهبود سلامتی شما طراحی شده است.</p>
+          <button onclick="addToCart('محصول 1', 50000)">افزودن به سبد خرید</button>
+        </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/300x200" alt="محصول 2">
+          <h3>محصول 2</h3>
+          <p class="price">70000 تومان</p>
+          <p class="description">یک محصول با کیفیت بالا برای مراقبت از پوست.</p>
+          <button onclick="addToCart('محصول 2', 70000)">افزودن به سبد خرید</button>
+        </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/300x200" alt="محصول 3">
+          <h3>محصول 3</h3>
+          <p class="price">30000 تومان</p>
+          <p class="description">مناسب برای تغذیه روزانه با خواص ویژه.</p>
+          <button onclick="addToCart('محصول 3', 30000)">افزودن به سبد خرید</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- سبد خرید -->
+    <section class="cart-container">
+      <h2>سبد خرید شما</h2>
+      <div class="product-list" id="cartItems">
+        <!-- محصولات بارگذاری می‌شوند -->
+      </div>
+      <div class="total" id="totalPrice">مجموع: 0 تومان</div>
+      <button class="payment-button" onclick="redirectToPayment()">پرداخت</button>
+    </section>
+  </main>
+
+  <script>
+    function addToCart(productName, price) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingProduct = cart.find(item => item.name === productName);
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        cart.push({ name: productName, price, quantity: 1 });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartList = document.getElementById('cartItems');
+      const totalPrice = document.getElementById('totalPrice');
+
+      let total = 0;
+      cartList.innerHTML = cartItems
+        .map((item, index) => {
+          total += item.price * item.quantity;
+          return `
+            <div class="product-item">
+              <span>${item.name}</span>
+              <span>${item.price.toLocaleString()} تومان × ${item.quantity}</span>
+              <div class="product-controls">
+                <button onclick="incrementQuantity(${index})">+1</button>
+                <button onclick="decrementQuantity(${index})">-1</button>
+                <button class="remove-btn" onclick="removeFromCart(${index})">حذف</button>
+              </div>
+            </div>
+          `;
+        })
+        .join('');
+
+      totalPrice.innerText = `مجموع: ${total.toLocaleString()} تومان`;
+    }
+
+    function incrementQuantity(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart[index].quantity += 1;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartDisplay();
+    }
+
+    function decrementQuantity(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart[index].quantity > 1) {
+        cart[index].quantity -= 1;
+      } else {
+        cart.splice(index, 1);
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartDisplay();
+    }
+
+    function removeFromCart(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartDisplay();
+    }
+
+    function redirectToPayment() {
+      if (JSON.parse(localStorage.getItem('cart'))?.length === 0) {
+        alert('سبد خرید شما خالی است!');
+        return;
+      }
+      alert('به صفحه پرداخت منتقل می‌شوید.');
+      window.location.href = 'payment.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', updateCartDisplay);
+  </script>
+  <script src="script.js"></script>
+
+</body>
+</html>

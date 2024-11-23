@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>داشبورد ادمین</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin_login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+  </style>
+</head>
+<body>
+   <!-- هدر -->
+   <header>
+    <style> 
+      header {
+        background-color: #212121fa !important; /* تغییر رنگ هنگام هاور */
+        color: #4d9d7cfa ;
+        -webkit-text-fill-color: #eeeaeafa ;
+      }    
+      </style>
+    <div class="header-left">
+      <i id="menuIcon" class="fas fa-bars"></i>
+    </div>
+    <div class="header-center">
+      <h1>داشبورد ادمین</h1>
+    </div>
+    <div class="header-right">
+      <i id="themeToggle" class="fas fa-adjust"></i>
+    </div>
+  </header>
+
+  <!-- منوی کناری -->
+  <nav id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="index.html">صفحه اصلی</a></li>
+      <li><a href="consultations.html">مشاوره‌ها</a></li>
+      <li><a href="products.html">محصولات</a></li>
+      <li><a href="about.html">درباره ما</a></li>
+      <li><a href="rules.html">قوانین و مقررات</a></li>
+      <li><a href="contact.html">تماس با ما</a></li>
+    </ul>
+  </nav>
+  <!-- منوی کناری -->
+  <nav id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="index.html">صفحه اصلی</a></li>
+      <li><a href="consultations_queue.html">صف مشاوره‌ها</a></li>
+      <li><a href="report.html">گزارشات ادمین</a></li>
+      <li><a href="rules.html">قوانین و مقررات</a></li>
+    </ul>
+  </nav>
+
+  <!-- محتوای اصلی -->
+  <main>
+    <!-- مشاوره‌ها -->
+    <section id="consultationsSection">
+      <h3>مشاوره‌ها</h3>
+      <ul id="consultationsList">
+        <!-- مشاوره‌ها بارگذاری می‌شود -->
+      </ul>
+    </section>
+
+    <!-- نمایش مشاوره انتخاب‌شده -->
+    <section id="chatSection" style="display: none;">
+      <h3>مشاوره انتخاب‌شده</h3>
+      <div id="chatMessages" class="chat-box">
+        <!-- متن مشاوره نمایش داده می‌شود -->
+      </div>
+      <form id="chatForm" class="chat-form" onsubmit="sendResponse(event)">
+        <textarea id="adminResponse" placeholder="پاسخ خود را وارد کنید..." required></textarea>
+        <button type="submit">ارسال پاسخ</button>
+      </form>
+    </section>
+    
+
+  </main>
+
+  <script>
+    const consultations = [
+      { id: 1, title: 'مشاوره شماره ۱', details: 'توضیحات مشاوره ۱' },
+      { id: 2, title: 'مشاوره شماره ۲', details: 'توضیحات مشاوره ۲' },
+      { id: 3, title: 'مشاوره شماره ۳', details: 'توضیحات مشاوره ۳' },
+    ];
+
+    function loadConsultations() {
+      const consultationsList = document.getElementById('consultationsList');
+      consultationsList.innerHTML = consultations
+        .map(
+          (consultation) => `
+            <li onclick="showConsultation(${consultation.id})">
+              <span>${consultation.title}</span>
+            </li>
+          `
+        )
+        .join('');
+    }
+
+    function showConsultation(id) {
+      const selectedConsultation = consultations.find(
+        (consultation) => consultation.id === id
+      );
+      const chatSection = document.getElementById('chatSection');
+      const chatMessages = document.getElementById('chatMessages');
+
+      chatMessages.innerHTML = `<p>${selectedConsultation.details}</p>`;
+      chatSection.style.display = 'block';
+    }
+
+    function sendResponse(event) {
+      event.preventDefault();
+      const response = document.getElementById('adminResponse').value;
+      const chatMessages = document.getElementById('chatMessages');
+
+      chatMessages.innerHTML += `<p><strong>ادمین:</strong> ${response}</p>`;
+      document.getElementById('adminResponse').value = '';
+    }
+
+    // بارگذاری مشاوره‌ها هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', loadConsultations);
+  </script>
+  
+  <!-- دسترسی سریع -->
+  <section id="quick-access">
+    <h3>دسترسی سریع</h3>
+    <ul>
+      <ul>
+       <li><a href="index.html">صفحه اصلی</a></li>
+       <li><a href="products.html">محصولات</a></li>
+       <li><a href="consultations.html">مشاوره‌ها</a></li>
+       <li><a href="about.html">درباره ما</a></li>
+      <li><a href="rules.html">قوانین و مقررات</a></li>
+    </ul>
+  </section>
+ 
+  <!-- اسکرپت‌ها -->
+  <script src="script.js"></script>
+  <!-- فوتر -->
+<footer style="background-color: #333; color: #fff; padding: 20px; text-align: center;">
+  <!-- شبکه‌های اجتماعی -->
+  <div style="margin-bottom: 20px;">
+    <h3>ما را در شبکه‌های اجتماعی دنبال کنید</h3>
+    <a href="https://t.me/your_telegram" target="_blank" style="color: #fff; margin: 0 10px;">
+      <i class="fab fa-telegram fa-2x"></i>
+    </a>
+    <a href="https://instagram.com/your_instagram" target="_blank" style="color: #fff; margin: 0 10px;">
+      <i class="fab fa-instagram fa-2x"></i>
+    </a>
+    <a href="https://wa.me/your_whatsapp_number" target="_blank" style="color: #fff; margin: 0 10px;">
+      <i class="fab fa-whatsapp fa-2x"></i>
+    </a>
+  </div>
+
+  <!-- نمادهای امنیتی -->
+  <div>
+    <h3>اعتماد شما افتخار ماست</h3>
+    <a href="https://www.enamad.ir" target="_blank">
+      <img src="https://via.placeholder.com/100x50" alt="eNAMAD" style="margin: 0 10px;">
+    </a>
+    <a href="https://samandehi.ir" target="_blank">
+      <img src="https://via.placeholder.com/100x50" alt="ساماندهی" style="margin: 0 10px;">
+    </a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خرید محصولات</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-theme">
+  <header>
+    <div class="header-left">
+      <a href="index.html"><i class="fas fa-home"></i> صفحه اصلی</a>
+    </div>
+    <div class="header-center">
+      <h1>خرید محصولات</h1>
+    </div>
+  </header>
+    <!-- منوی کناری -->
+    <nav id="sideMenu" class="side-menu">
+      <ul>
+        <li><a href="index.html">صفحه اصلی</a></li>
+        <li><a href="consultations.html">مشاوره‌ها</a></li>
+        <li><a href="products.html">محصولات</a></li>
+        <li><a href="about.html">درباره ما</a></li>
+        <li><a href="rules.html">قوانین و مقررات</a></li>
+        <li><a href="login.html">ورود/ثبت نام</a></li>
+        <li><a href="contact.html">تماس با ما</a></li>
+      </ul>
+    </nav>
+  <main>
+    <section id="products">
+      <h2>محصولات پیشنهادی</h2>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x200" alt="محصول 1">
+        <h3>محصول 1</h3>
+        <p>توضیحات محصول 1</p>
+        <button onclick="addToCart('محصول 1')">افزودن به سبد خرید</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x200" alt="محصول 2">
+        <h3>محصول 2</h3>
+        <p>توضیحات محصول 2</p>
+        <button onclick="addToCart('محصول 2')">افزودن به سبد خرید</button>
+      </div>
+    </section>
+
+    <section id="cart">
+      <h2>سبد خرید شما</h2>
+      <ul id="cart-items"></ul>
+      <button onclick="checkout()">پرداخت</button>
+    </section>
+  </main>
+
+  <script>
+    const cart = [];
+
+    function addToCart(product) {
+      cart.push(product);
+      document.getElementById('cart-items').innerHTML = cart
+        .map(item => `<li>${item}</li>`)
+        .join('');
+    }
+
+    function checkout() {
+      alert('پرداخت انجام شد! سفارش شما ثبت شد.');
+      document.getElementById('cart-items').innerHTML = '';
+    }
+  </script>
+</body>
+</html>

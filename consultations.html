@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مشاوره‌ها</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+</head>
+<body class="light-theme">
+  <!-- هدر -->
+  <header>
+    <style> 
+      header {
+        background-color: #212121fa !important; /* تغییر رنگ هنگام هاور */
+        color: #4d9d7cfa ;
+        -webkit-text-fill-color: #eeeaeafa ;
+      }    
+      </style>
+    <div class="header-left">
+      <i id="menuIcon" class="fas fa-bars"></i>
+    </div>
+    <div class="header-center">
+      <h1>مشاوره‌ها</h1>
+    </div>
+    <div class="header-right">
+      <i id="themeToggle" class="fas fa-adjust"></i>
+    </div>
+  </header>
+
+  <!-- منوی کناری -->
+  <nav id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="index.html">صفحه اصلی</a></li>
+      <li><a href="consultations.html">مشاوره‌ها</a></li>
+      <li><a href="products.html">محصولات</a></li>
+      <li><a href="about.html">درباره ما</a></li>
+      <li><a href="rules.html">قوانین و مقررات</a></li>
+      <li><a href="login.html">ورود/ثبت نام</a></li>
+      <li><a href="contact.html">تماس با ما</a></li>
+    </ul>
+  </nav>
+
+  <!-- محتوای اصلی -->
+  <main>
+     <!-- لیست مشاوره‌ها -->
+     <div class="consultation-container">
+      <section id="consultations">
+        <h2>مشاوره‌ها</h2>
+        <ul class="consultation-list">
+          <li><button class="consultation-btn" onclick="showConsultation('fibroid', 'مشاوره بیماری فیبروم رحم')">مشاوره بیماری فیبروم رحم</button></li>
+          <li><button class="consultation-btn" onclick="showConsultation('hairLoss', 'مشاوره ریزش مو')">مشاوره ریزش مو</button></li>
+          <li><button class="consultation-btn" onclick="showConsultation('fattyLiver', 'مشاوره کبد چرب')">مشاوره کبد چرب</button></li>
+       </ul>
+    </section>
+   </div>
+
+
+    <!-- ویدیوها و فرم -->
+    <div id="consultationContent" class="consultation-content" style="display: none;">
+      <div id="videos" class="video-section">
+        <h3>ویدیوهای آموزشی:</h3>
+        <div id="videoList"></div>
+      </div>
+
+      <!-- فرم مشاوره -->
+
+    
+
+      <div id="specialConsultation" class="special-consultation-section">
+        <h2 id="formTitle">فرم مشاوره</h2>
+        <form id="consultationForm" action="server-endpoint" method="POST" enctype="multipart/form-data">
+          <label for="fullName">نام و نام خانوادگی:</label>
+          <input type="text" id="fullName" name="fullName" placeholder="نام خود را وارد کنید" required>
+
+          <label for="age">سن:</label>
+          <input type="number" id="age" name="age" placeholder="سن خود را وارد کنید" required>
+
+          <label for="gender">جنسیت:</label>
+          <select id="gender" name="gender" required>
+            <option value="" disabled selected>انتخاب کنید</option>
+            <option value="male">مرد</option>
+            <option value="female">زن</option>
+          </select>
+
+          <label for="contactNumber">شماره تماس:</label>
+          <input type="tel" id="contactNumber" name="contactNumber" placeholder="مثال: 09123456789" required>
+
+          <label for="symptoms">علائم بیماری:</label>
+          <textarea id="symptoms" name="symptoms" rows="4" placeholder="علائم بیماری خود را شرح دهید" required></textarea>
+
+          <div class="file-upload">
+            <label for="medicalFile">آپلود مدارک پزشکی</label>
+            <input type="file" id="medicalFile" name="medicalFile" accept=".jpg, .png, .pdf" placeholder="آپلود مدارک پزشکی"required></input>
+          </div>
+          <small>فرمت‌های مجاز: JPG, PNG, PDF</small>
+
+          <button type="submit">ارسال درخواست</button>
+        </form>
+        
+<!-- بخش چت -->
+<div id="chatContainer" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; display: flex; flex-direction: column; height: 500px;">
+  <h2>چت با مشاور</h2>
+  
+  <div id="chatWindow" style="flex: 1; overflow-y: auto; padding: 10px; background: #fff; border: 1px solid #ddd; margin-bottom: 10px;">
+    <!-- پیام‌ها به صورت داینامیک اضافه می‌شوند -->
+  
+  </div>
+  <div style="display: flex; gap: 10px;">
+    <input type="text" id="chatInput" placeholder="پیام خود را بنویسید..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+    <button id="sendMessage">ارسال</button>
+  </div>
+</div>
+      </div>
+    </div>
+    
+  </main>
+
+  <script>
+    function showConsultation(topic, title) {
+      const consultationContent = document.getElementById('consultationContent');
+      const videoList = document.getElementById('videoList');
+      const formTitle = document.getElementById('formTitle');
+
+      formTitle.textContent = title;
+
+      let videos = '';
+
+      if (topic === 'fibroid') {
+        videos = `
+          <div>
+            <h4>ویدیو 1: آشنایی با بیماری فیبروم رحم</h4>
+            <video src="fibroid-video1.mp4" controls></video>
+          </div>
+          <div>
+            <h4>ویدیو 2: راه‌های درمان فیبروم رحم</h4>
+            <video src="fibroid-video2.mp4" controls></video>
+          </div>
+        `;
+      } else if (topic === 'hairLoss') {
+        videos = `
+          <div>
+            <h4>ویدیو 1: علل ریزش مو</h4>
+            <video src="hairloss-video1.mp4" controls></video>
+          </div>
+          <div>
+            <h4>ویدیو 2: روش‌های درمان ریزش مو</h4>
+            <video src="hairloss-video2.mp4" controls></video>
+          </div>
+        `;
+      } else if (topic === 'fattyLiver') {
+        videos = `
+          <div>
+            <h4>ویدیو 1: شناخت بیماری کبد چرب</h4>
+            <video src="fattyliver-video1.mp4" controls></video>
+          </div>
+          <div>
+            <h4>ویدیو 2: روش‌های درمان کبد چرب</h4>
+            <video src="fattyliver-video2.mp4" controls></video>
+          </div>
+        `;
+      }
+      videoList.innerHTML = videos;
+      consultationContent.style.display = 'block';
+      specialConsultation.style.display = 'none';
+    }
+  </script>
+
+
+<script>
+  const chatWindow = document.getElementById('chatWindow');
+  const chatInput = document.getElementById('chatInput');
+  const sendMessage = document.getElementById('sendMessage');
+
+  // ارسال پیام
+  sendMessage.addEventListener('click', () => {
+    const message = chatInput.value.trim();
+    if (message) {
+      addMessage('user', message); // اضافه کردن پیام کاربر
+      chatInput.value = ''; // پاک کردن ورودی
+      simulateAdminReply(); // شبیه‌سازی پاسخ ادمین
+    }
+  });
+
+  // اضافه کردن پیام به پنجره چت
+  function addMessage(sender, message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', sender);
+    messageDiv.style.marginBottom = '10px';
+    messageDiv.style.textAlign = sender === 'user' ? 'right' : 'left';
+    messageDiv.style.color = sender === 'user' ? '#007bff' : '#444';
+    messageDiv.textContent = message;
+    chatWindow.appendChild(messageDiv);
+    chatWindow.scrollTop = chatWindow.scrollHeight; // اسکرول به پایین
+  }
+
+  // شبیه‌سازی پاسخ ادمین
+  function simulateAdminReply() {
+    setTimeout(() => {
+      addMessage('admin', 'پیام شما دریافت شد.');
+    }, 1000);
+  }
+</script>
+
+
+
+
+           <!-- دکمه درخواست مشاوره تخصصی -->
+           <div>
+            <button id="requestConsultation" style="margin: 20px;">درخواست مشاوره تخصصی</button>
+           </div>
+
+<!-- دسترسی سریع -->
+<section id="quick-access">
+    <h3>دسترسی سریع</h3>
+    <ul>
+      <ul>
+       <li><a href="index.html">صفحه اصلی</a></li>
+       <li><a href="products.html">محصولات</a></li>
+       <li><a href="consultations.html">مشاوره‌ها</a></li>
+       <li><a href="about.html">درباره ما</a></li>
+      <li><a href="rules.html">قوانین و مقررات</a></li>
+    </ul>
+  </section>
+    <!-- فوتر -->
+  <footer style="background-color: #333; color: #fff; padding: 20px; text-align: center;">
+    <!-- شبکه‌های اجتماعی -->
+    <div style="margin-bottom: 20px;">
+      <h3>ما را در شبکه‌های اجتماعی دنبال کنید</h3>
+      <a href="https://t.me/your_telegram" target="_blank" style="color: #fff; margin: 0 10px;">
+        <i class="fab fa-telegram fa-2x"></i>
+      </a>
+      <a href="https://instagram.com/your_instagram" target="_blank" style="color: #fff; margin: 0 10px;">
+        <i class="fab fa-instagram fa-2x"></i>
+      </a>
+      <a href="https://wa.me/your_whatsapp_number" target="_blank" style="color: #fff; margin: 0 10px;">
+        <i class="fab fa-whatsapp fa-2x"></i>
+      </a>
+    </div>
+  
+    <!-- نمادهای امنیتی -->
+    <div>
+      <h3>اعتماد شما افتخار ماست</h3>
+      <a href="https://www.enamad.ir" target="_blank">
+        <img src="https://via.placeholder.com/100x50" alt="eNAMAD" style="margin: 0 10px;">
+      </a>
+      <a href="https://samandehi.ir" target="_blank">
+        <img src="https://via.placeholder.com/100x50" alt="ساماندهی" style="margin: 0 10px;">
+      </a>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    // نمایش فرم مشاوره تخصصی
+    document.getElementById('requestConsultation').addEventListener('click', () => {
+      document.getElementById('specialConsultation').style.display = 'block';
+    });
+  
+  </script>
+</body>
+<style>
+  .consultation-btn {
+    background-color: #4f4f4f !important; /* رنگ نوک مدادی */
+    color: white !important; /* رنگ متن */
+    border: none !important; /* حذف خط دور دکمه */
+    padding: 10px 20px !important; /* فضای داخلی دکمه */
+    border-radius: 5px !important; /* گوشه‌های گرد */
+    cursor: pointer !important; /* نشانگر ماوس به حالت کلیک */
+    font-size: 16px !important; /* اندازه متن */
+    transition: background-color 0.3s ease !important; /* انیمیشن */
+  }
+
+  .consultation-btn:hover {
+    background-color: #5f5f5f !important; /* تغییر رنگ هنگام هاور */
+  }
+</style>
+
+</html>

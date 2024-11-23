@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سلامتی اسکندری - ورود و ثبت نام</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- استایل داخلی -->
+<style>
+    body {
+      font-family: 'Vazir', sans-serif;
+      direction: rtl;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #444;
+      color: #fff;
+    }
+    .auth-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px;
+      cursor: pointer;
+      text-align: center;
+      background: #ddd;
+      border: none;
+    }
+    .tab.active {
+      background: #444;
+      color: #fff;
+    }
+    .form {
+      display: none;
+    }
+    .form.active {
+      display: block;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-bottom: 5px;
+    }
+    input {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .btn {
+      padding: 10px;
+      background: #444;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #333;
+    }
+  </style>
+
+
+</head>
+<body class="light-theme">
+  <!-- هدر -->
+  <header>
+    <style> 
+      header {
+        background-color: #212121fa !important; /* تغییر رنگ هنگام هاور */
+        color: #4d9d7cfa ;
+        -webkit-text-fill-color: #eeeaeafa ;
+      }    
+      </style>
+    <div class="header-left">
+      <i id="menuIcon" class="fas fa-bars"></i>
+    </div>
+    <div class="header-center">
+      <h1>ورود / ثبت نام</h1>
+    </div>
+    <div class="header-right">
+      <i id="themeToggle" class="fas fa-adjust"></i>
+    </div>
+  </header>
+
+    <!-- منوی کناری -->
+    <nav id="sideMenu" class="side-menu">
+      <ul>
+        <li><a href="index.html">صفحه اصلی</a></li>
+        <li><a href="consultations.html">مشاوره‌ها</a></li>
+        <li><a href="products.html">محصولات</a></li>
+        <li><a href="about.html">درباره ما</a></li>
+        <li><a href="rules.html">قوانین و مقررات</a></li>
+        <li><a href="login.html">ورود/ثبت نام</a></li>
+        <li><a href="contact.html">تماس با ما</a></li>
+      </ul>
+    </nav>
+
+  <!-- فرم ورود -->
+  <section id="auth">
+    <div class="auth-container">
+      <div class="tabs">
+        <button id="loginTab" class="tab active">ورود</button>
+        <button id="registerTab" class="tab">ثبت نام</button>
+      </div>
+      <div id="loginForm" class="form active">
+        <h2>ورود</h2>
+        <form id="login" action="/login" method="post">
+          <label for="loginEmail">ایمیل:</label>
+          <input type="email" id="loginEmail" name="email" required>
+          <label for="loginPassword">رمز عبور:</label>
+          <input type="password" id="loginPassword" name="password" required>
+          <button type="submit" class="btn">ورود</button>
+        </form>
+      </div>
+      <div id="registerForm" class="form">
+        <h2>ثبت نام</h2>
+        <form id="register" action="/register" method="post">
+          <label for="registerName">نام کامل:</label>
+          <input type="text" id="registerName" name="name" required>
+          <label for="registerEmail">ایمیل:</label>
+          <input type="email" id="registerEmail" name="email" required>
+          <label for="registerPassword">رمز عبور:</label>
+          <input type="password" id="registerPassword" name="password" required>
+          <label for="confirmPassword">تکرار رمز عبور:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required>
+          <button type="submit" class="btn">ثبت نام</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- اسکریپت‌ها -->
+   <script src="script.js">
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault(); // جلوگیری از ارسال فرم
+    loginUser(); // تابعی که وضعیت لاگین را به true تغییر می‌دهد
+    window.location.href = 'admin_dashboard.html'; // بازگشت به صفحه داشبورد
+    });
+
+    
+   </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginTab = document.getElementById("loginTab");
+      const registerTab = document.getElementById("registerTab");
+      const loginForm = document.getElementById("loginForm");
+      const registerForm = document.getElementById("registerForm");
+
+      loginTab.addEventListener("click", () => {
+        loginTab.classList.add("active");
+        registerTab.classList.remove("active");
+        loginForm.classList.add("active");
+        registerForm.classList.remove("active");
+      });
+
+      registerTab.addEventListener("click", () => {
+        registerTab.classList.add("active");
+        loginTab.classList.remove("active");
+        registerForm.classList.add("active");
+        loginForm.classList.remove("active");
+      });
+
+      const register = document.getElementById("register");
+      register.addEventListener("submit", (e) => {
+        const password = document.getElementById("registerPassword").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        if (password !== confirmPassword) {
+          e.preventDefault();
+          alert("رمز عبور و تکرار آن مطابقت ندارند!");
+        }
+      });
+    });
+  </script>
+
+  
+  <!-- دسترسی سریع -->
+  <section id="quick-access">
+    <h3>دسترسی سریع</h3>
+    <ul>
+      <ul>
+       <li><a href="index.html">صفحه اصلی</a></li>
+       <li><a href="products.html">محصولات</a></li>
+       <li><a href="consultations.html">مشاوره‌ها</a></li>
+       <li><a href="about.html">درباره ما</a></li>
+      <li><a href="rules.html">قوانین و مقررات</a></li>
+    </ul>
+  </section>
+ 
+  <!-- اسکرپت‌ها -->
+  <script src="script.js"></script>
+  <!-- فوتر -->
+<footer style="background-color: #333; color: #fff; padding: 20px; text-align: center;">
+  <!-- شبکه‌های اجتماعی -->
+  <div style="margin-bottom: 20px;">
+    <h3>ما را در شبکه‌های اجتماعی دنبال کنید</h3>
+    <a href="https://t.me/your_telegram" target="_blank" style="color: #fff; margin: 0 10px;">
+      <i class="fab fa-telegram fa-2x"></i>
+    </a>
+    <a href="https://instagram.com/your_instagram" target="_blank" style="color: #fff; margin: 0 10px;">
+      <i class="fab fa-instagram fa-2x"></i>
+    </a>
+    <a href="https://wa.me/your_whatsapp_number" target="_blank" style="color: #fff; margin: 0 10px;">
+      <i class="fab fa-whatsapp fa-2x"></i>
+    </a>
+  </div>
+
+  <!-- نمادهای امنیتی -->
+  <div>
+    <h3>اعتماد شما افتخار ماست</h3>
+    <a href="https://www.enamad.ir" target="_blank">
+      <img src="https://via.placeholder.com/100x50" alt="eNAMAD" style="margin: 0 10px;">
+    </a>
+    <a href="https://samandehi.ir" target="_blank">
+      <img src="https://via.placeholder.com/100x50" alt="ساماندهی" style="margin: 0 10px;">
+    </a>
+  </div>
+</footer>
+
+
+</body>
+</html>

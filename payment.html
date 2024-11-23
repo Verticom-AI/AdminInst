@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>صفحه پرداخت</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .payment-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .product-list {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .product-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .product-item:last-child {
+      border-bottom: none;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .user-info {
+      margin-top: 20px;
+    }
+
+    .user-info label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .user-info input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .payment-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background-color: #28a745;
+      color: #fff;
+      text-align: center;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .payment-button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <style> 
+      header {
+        background-color: #212121fa !important; /* تغییر رنگ هنگام هاور */
+        color: #4d9d7cfa ;
+        -webkit-text-fill-color: #eeeaeafa ;
+      }    
+      </style>
+    <div class="header-center">
+      <h1>صفحه پرداخت</h1>
+    </div>
+  </header>
+    <!-- منوی کناری -->
+    <nav id="sideMenu" class="side-menu">
+      <ul>
+        <li><a href="index.html">صفحه اصلی</a></li>
+        <li><a href="consultations.html">مشاوره‌ها</a></li>
+        <li><a href="products.html">محصولات</a></li>
+        <li><a href="about.html">درباره ما</a></li>
+        <li><a href="rules.html">قوانین و مقررات</a></li>
+        <li><a href="login.html">ورود/ثبت نام</a></li>
+        <li><a href="contact.html">تماس با ما</a></li>
+      </ul>
+    </nav>
+  <main>
+    <section class="payment-container">
+      <h2>سبد خرید شما</h2>
+      <div class="product-list" id="productList">
+        <!-- محصولات بارگذاری می‌شوند -->
+      </div>
+      <div class="total" id="totalPrice">مجموع: 0 تومان</div>
+
+      <!-- فرم اطلاعات کاربر -->
+      <div class="user-info">
+        <h2>اطلاعات شما</h2>
+        <form id="paymentForm">
+          <label for="fullName">نام و نام خانوادگی:</label>
+          <input type="text" id="fullName" name="fullName" placeholder="نام و نام خانوادگی" required>
+
+          <label for="address">آدرس:</label>
+          <input type="text" id="address" name="address" placeholder="آدرس کامل" required>
+
+          <label for="phone">شماره تماس:</label>
+          <input type="tel" id="phone" name="phone" placeholder="مثال: 09123456789" required>
+
+          <button type="submit" class="payment-button">پرداخت</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // بارگذاری سبد خرید
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const productList = document.getElementById('productList');
+      const totalPrice = document.getElementById('totalPrice');
+
+      let total = 0;
+      productList.innerHTML = cart
+        .map(item => {
+          total += item.price * item.quantity;
+          return `
+            <div class="product-item">
+              <span>${item.name}</span>
+              <span>${item.price.toLocaleString()} تومان × ${item.quantity}</span>
+            </div>
+          `;
+        })
+        .join('');
+
+      totalPrice.innerText = `مجموع: ${total.toLocaleString()} تومان`;
+    }
+
+    // مدیریت پرداخت
+    document.getElementById('paymentForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // جلوگیری از رفرش شدن صفحه
+
+      const fullName = document.getElementById('fullName').value;
+      const address = document.getElementById('address').value;
+      const phone = document.getElementById('phone').value;
+
+      if (!fullName || !address || !phone) {
+        alert('لطفاً تمام فیلدها را پر کنید.');
+        return;
+      }
+
+      // شبیه‌سازی اتصال به درگاه پرداخت
+      alert('پرداخت شما در حال انجام است...');
+      // ارسال داده‌ها به سرور
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+      const paymentData = {
+        fullName,
+        address,
+        phone,
+        cart,
+        total,
+      };
+
+      console.log('اطلاعات پرداخت:', paymentData);
+
+      // پاک کردن سبد خرید
+      localStorage.removeItem('cart');
+      alert('پرداخت با موفقیت انجام شد! از خرید شما متشکریم.');
+      window.location.href = 'index.html'; // بازگشت به صفحه اصلی
+    });
+
+    // بارگذاری سبد خرید در هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', loadCart);
+  </script>
+</body>
+</html>
