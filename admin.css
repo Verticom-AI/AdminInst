@@ -1,0 +1,344 @@
+/* تنظیمات عمومی */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    direction: rtl;
+  }
+  
+  header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  .box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .section-header p {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  h2, h3 {
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+  }
+  
+  ul li.finalized {
+    color: gray;
+    pointer-events: none;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: none;
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+  /* استایل محصولات */
+  #productList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  #productList li label {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
+  #prescriptionTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  #prescriptionTable th,
+  #prescriptionTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  #totalCost {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  /* Import Vazir font for consistency */
+@import url('https://fonts.googleapis.com/css2?family=Vazir&display=swap');
+
+body {
+    font-family: 'Vazir', sans-serif;
+}
+
+/* Consistent button styles */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Chat Section Enhancements */
+#chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.message {
+  max-width: 60%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.message.user {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-start;
+}
+
+.message.admin {
+  background-color: #e9ecef;
+  color: black;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.chat-input-container {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input-container textarea {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  resize: none;
+  height: 40px;
+}
+
+.chat-input-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.chat-input-container button:hover {
+  background-color: #0056b3;
+}
+
+/* General Dark Theme */
+body.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-theme header {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+}
+
+body.dark-theme .box {
+  background-color: #1f1f1f;
+  border-color: #333;
+  color: #e0e0e0;
+}
+
+body.dark-theme a {
+  color: #80cbc4;
+}
+
+body.dark-theme #chatContainer {
+  background-color: #1e1e1e;
+}
+
+body.dark-theme .chat-messages {
+  background-color: #1e1e1e;
+}
+
+body.dark-theme .message.user {
+  background-color: #3572a5;
+  color: #fff;
+}
+
+body.dark-theme .message.admin {
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+}
+
+body.dark-theme .chat-input-container {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+body.dark-theme .chat-input-container textarea {
+  background-color: #333;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+body.dark-theme .chat-input-container button {
+  background-color: #444;
+  color: #e0e0e0;
+}
+
+body.dark-theme .chat-input-container button:hover {
+  background-color: #555;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .box {
+    padding: 15px;
+  }
+  #chatContainer {
+    height: 200px;
+  }
+
+  .chat-input-container textarea {
+    height: 30px;
+  }
+}
+@media (max-width: 480px) {
+  body {
+      font-size: 14px;
+  }
+  header, footer {
+      padding: 10px;
+      font-size: 16px;
+  }
+  .box {
+      padding: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .chat-input-container {
+      flex-direction: column;
+  }
+  .chat-input-container textarea {
+      width: 100%;
+      height: 60px;
+  }
+  .chat-input-container button {
+      width: 100%;
+      margin-top: 10px;
+  }
+}
+/* Apply dark theme to table rows */
+body.dark-theme table, 
+body.dark-theme th, 
+body.dark-theme td {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-color: #333;
+}
+
+/* Alternate row styling for better visibility */
+body.dark-theme tr:nth-child(even) {
+    background-color: #2a2a2a;
+}
+
+/* Product list styling */
+body.dark-theme ul#productList li {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #333;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Checkbox label styling */
+body.dark-theme ul#productList li label {
+    color: #e0e0e0;
+}
+
+/* Highlight hover effect */
+body.dark-theme ul#productList li:hover,
+body.dark-theme table tr:hover {
+    background-color: #444;
+    color: #fff;
+}

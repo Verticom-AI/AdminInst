@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سلامتی اسکندری</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="light-theme">
+  <!-- هدر -->
+  <script src="script.js" defer></script>
+  <script src="admin.js" defer></script>
+  
+  <header>
+    <style> 
+      header {
+        background-color: #212121fa !important; /* تغییر رنگ هنگام هاور */
+        color: #4d9d7cfa ;
+        -webkit-text-fill-color: #eeeaeafa ;
+      }    
+      </style>
+    <div class="header-left">
+      <i id="menuIcon" class="fas fa-bars"></i>
+    </div>
+    <div class="header-center">
+      <h1>صفحه اصلی</h1>
+    </div>
+    <div class="header-right">
+      <i id="themeToggle" class="fas fa-adjust"></i>
+    </div>
+  </header>
+
+  <!-- منوی کناری -->
+  <nav id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="index.html">صفحه اصلی</a></li>
+      <li><a href="consultations.html">مشاوره‌ها</a></li>
+      <li><a href="products.html">محصولات</a></li>
+      <li><a href="about.html">درباره ما</a></li>
+      <li><a href="rules.html">قوانین و مقررات</a></li>
+      <li><a href="login.html">ورود/ثبت نام</a></li>
+      <li><a href="contact.html">تماس با ما</a></li>
+    </ul>
+  </nav>
+  <main>
+    <!-- لیست مشاوره‌ها -->
+    <section id="consultationsSection" class="box">
+      <h2>لیست مشاوره‌ها</h2>
+      <ul id="consultationList"></ul>
+      <h3>مشاوره‌های نهایی‌شده</h3>
+      <ul id="finalizedConsultationList"></ul>
+    </section>
+
+    <!-- نمایش مشاوره انتخاب‌شده -->
+    <section id="selectedConsultationSection" class="box">
+      <h2>مشاوره انتخاب‌شده</h2>
+      <div id="consultationDetails">
+        <h3 id="consultationTitle">مشاوره: ---</h3>
+        <p id="consultationDescription">لطفاً یک مشاوره انتخاب کنید.</p>
+      </div>
+      <div id="chatBox">
+        <h3>چت با کاربر</h3>
+        <div id="chatMessages"></div>
+        <div id="chatInputContainer">
+          <textarea id="adminMessage" placeholder="پیام خود را بنویسید..."></textarea>
+          <button id="sendMessageButton">ارسال</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- نسخه -->
+    <section id="prescriptionSection" class="box">
+      <div class="section-header">
+        <h2>ایجاد نسخه</h2>
+        <p id="currentDate"></p>
+      </div>
+      <h3>انتخاب محصولات</h3>
+      <ul id="productList"></ul>
+      <h3>نسخه</h3>
+      <table id="prescriptionTable">
+        <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>عنوان مشاوره</th>
+            <th>کالا</th>
+            <th>توضیحات</th>
+            <th>نحوه استفاده</th>
+            <th>تعداد</th>
+          </tr>
+        </thead>
+        <tbody id="prescriptionBody">
+          <!-- نسخه بارگذاری می‌شود -->
+        </tbody>
+      </table>
+      <p id="totalCost">مجموع: 0 تومان</p>
+      <button id="finalizeConsultationButton">نهایی‌سازی مشاوره</button>
+    </section>
+
+  </main>
+
+<script>
+    let adminCart = [];
+
+// Add product to admin cart
+function addProductToAdminCart(productId) {
+    const product = products.find(p => p.id === productId);
+    const existingItem = adminCart.find(item => item.id === productId);
+
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        adminCart.push({ ...product, quantity: 1 });
+    }
+    updateAdminCart();
+}
+
+// Remove product from admin cart
+function removeProductFromAdminCart(productId) {
+    adminCart = adminCart.filter(item => item.id !== productId);
+    updateAdminCart();
+}
+
+// Update admin cart UI
+function updateAdminCart() {
+    const adminCartBody = document.getElementById('adminCartBody');
+    const adminCartTotal = document.getElementById('adminCartTotal');
+
+    adminCartBody.innerHTML = adminCart.map(item => `
+        <tr>
+          <td>${item.name}</td>
+          <td>${item.description}</td>
+          <td>${item.quantity}</td>
+          <td>
+            <button onclick="addProductToAdminCart(${item.id})">افزودن</button>
+            <button onclick="removeProductFromAdminCart(${item.id})">حذف</button>
+            
+          </td>
+          
+        </tr>
+
+    `).join('');
+
+    const total = adminCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    adminCartTotal.textContent = `مجموع: ${total.toLocaleString()} تومان`;
+}
+
+</script>
+
+  
+  <script src="admin.js"></script>
+  
+ <!-- دسترسی سریع -->
+ <section id="quick-access">
+  <h3>دسترسی سریع</h3>
+  <ul>
+    <ul>
+     <li><a href="index.html">صفحه اصلی</a></li>
+     <li><a href="products.html">محصولات</a></li>
+     <li><a href="consultations.html">مشاوره‌ها</a></li>
+     <li><a href="about.html">درباره ما</a></li>
+    <li><a href="rules.html">قوانین و مقررات</a></li>
+  </ul>
+</section>
+
+<!-- اسکرپت‌ها -->
+<script src="script.js"></script>
+<!-- فوتر -->
+<footer style="background-color: #333; color: #fff; padding: 20px; text-align: center;">
+<!-- شبکه‌های اجتماعی -->
+<div style="margin-bottom: 20px;">
+  <h3>ما را در شبکه‌های اجتماعی دنبال کنید</h3>
+  <a href="https://t.me/your_telegram" target="_blank" style="color: #fff; margin: 0 10px;">
+    <i class="fab fa-telegram fa-2x"></i>
+  </a>
+  <a href="https://instagram.com/your_instagram" target="_blank" style="color: #fff; margin: 0 10px;">
+    <i class="fab fa-instagram fa-2x"></i>
+  </a>
+  <a href="https://wa.me/your_whatsapp_number" target="_blank" style="color: #fff; margin: 0 10px;">
+    <i class="fab fa-whatsapp fa-2x"></i>
+  </a>
+</div>
+
+<!-- نمادهای امنیتی -->
+<div>
+  <h3>اعتماد شما افتخار ماست</h3>
+  <a href="https://www.enamad.ir" target="_blank">
+    <img src="https://via.placeholder.com/100x50" alt="eNAMAD" style="margin: 0 10px;">
+  </a>
+  <a href="https://samandehi.ir" target="_blank">
+    <img src="https://via.placeholder.com/100x50" alt="ساماندهی" style="margin: 0 10px;">
+  </a>
+</div>
+</footer>
+
+  <!-- اسکریپت -->
+  <script src="script.js" defer></script>
+  <script src="admin.js" defer></script>
+</body>
+</html>
